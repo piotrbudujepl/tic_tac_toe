@@ -9,13 +9,12 @@ ColumnLayout {
     ToolBar {
         Layout.fillWidth: true
 
-            Button {
-                text: "New Game"
-                onClicked: {
-                    console.log("New game")
-                }
-            }            
-
+        Button {
+            text: "New Game"
+            onClicked: {
+                controller.start_new_game()
+            }
+        }
     }
     GridLayout {
         Layout.fillWidth: true
@@ -23,50 +22,76 @@ ColumnLayout {
         rows: 3
         columns: 3
         Button {
-            text: ""
+            text: model.field_0_0
             implicitWidth: 100
             implicitHeight: 100
+            onClicked: function () {
+                controller.move(0, 0)
+            }
         }
         Button {
-            text: ""
+            text: model.field_0_1
             implicitWidth: 100
             implicitHeight: 100
+            onClicked: function () {
+                controller.move(0, 1)
+            }
         }
         Button {
-            text: ""
+            text: model.field_0_2
             implicitWidth: 100
             implicitHeight: 100
+            onClicked: function () {
+                controller.move(0, 2)
+            }
         }
         Button {
-            text: ""
+            text: model.field_1_0
             implicitWidth: 100
             implicitHeight: 100
+            onClicked: function () {
+                controller.move(1, 0)
+            }
         }
         Button {
-            text: ""
+            text: model.field_1_1
             implicitWidth: 100
             implicitHeight: 100
+            onClicked: function () {
+                controller.move(1, 1)
+            }
         }
         Button {
-            text: ""
+            text: model.field_1_2
             implicitWidth: 100
             implicitHeight: 100
+            onClicked: function () {
+                controller.move(1, 2)
+            }
         }
         Button {
-            text: ""
+            text: model.field_2_0
             implicitWidth: 100
             implicitHeight: 100
+            onClicked: function () {
+                controller.move(2, 0)
+            }
         }
         Button {
-            text: ""
+            text: model.field_2_1
             implicitWidth: 100
             implicitHeight: 100
+            onClicked: function () {
+                controller.move(2, 1)
+            }
         }
         Button {
-            text: ""
+            text: model.field_2_2
             implicitWidth: 100
             implicitHeight: 100
+            onClicked: function () {
+                controller.move(2, 2)
+            }
         }
-
-    }    
+    }
 }
