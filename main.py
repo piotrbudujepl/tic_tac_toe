@@ -5,7 +5,8 @@ from PySide6.QtCore import QUrl, qInstallMessageHandler
 from PySide6.QtGui import QGuiApplication
 from PySide6.QtQuick import QQuickView
 
-from controller import controller
+from controller import Controller
+from model import Model
 
 
 def qt_message_handler(mode, context, message):
@@ -22,9 +23,12 @@ qml_file = Path(__file__).parent / "view.qml"
 if not qml_file.exists():
     print("No qml file")
 
-view.rootContext().setContextProperty("controller", controller)
-view.setSource(QUrl.fromLocalFile(qml_file.resolve()))
+model = Model()
+controller = Controller(model)
 
+view.rootContext().setContextProperty("controller", controller)
+view.rootContext().setContextProperty("model", model)
+view.setSource(QUrl.fromLocalFile(qml_file.resolve()))
 
 if view.status() == QQuickView.Error:
     for e in view.errors():
