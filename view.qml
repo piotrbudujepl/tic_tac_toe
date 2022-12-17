@@ -5,6 +5,35 @@ import QtQuick.Dialogs
 import QtQml
 
 ColumnLayout {
+    Popup {
+        property alias text: messageText.text
+        id: messageDialog
+        modal: true
+        focus: true
+        anchors.centerIn: Overlay.overlay
+        ColumnLayout {
+            anchors.fill: parent
+            Text {
+                id: messageText
+                Layout.fillWidth: true
+            }
+            Button {
+                Layout.alignment: Qt.AlignHCenter
+                text: "Ok"
+                onClicked: {
+                    messageDialog.close()
+                }
+            }
+        }
+    }
+    Connections {
+        target: controller
+        function onGame_ended(message) {
+            console.log(message)
+            messageDialog.text = message
+            messageDialog.open()
+        }
+    }
 
     ToolBar {
         Layout.fillWidth: true
