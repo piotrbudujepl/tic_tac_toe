@@ -21,9 +21,26 @@ class Model(QObject):
              self.field_2_2_changed)
         ]
         self._current_player_value = "O"
+        self._game_over_value = False
+
+    def _game_over(self):
+        return self._game_over_value
+
+    def _set_game_over(self, value):
+        self._game_over_value = value
 
     def field_has_value(self, y, x):
         return self.board[y][x] != ""
+
+    def board_has_empty_field(self):
+        for row in self.board:
+            for column in row:
+                if column == "":
+                    return True
+        return False
+
+    def field(self, y, x):
+        return self.board[y][x]
 
     def update_field(self, y, x, value):
         self.board[y][x] = value
@@ -32,7 +49,7 @@ class Model(QObject):
     def _current_player(self):
         return self._current_player_value
 
-    def set_current_player(self, player):
+    def _set_current_player(self, player):
         self._current_player_value = player
         self.current_player_changed.emit()
 
@@ -47,6 +64,7 @@ class Model(QObject):
             ["", "", ""]
         ]
         self._current_player_value = "O"
+        self._game_over_value = False
         for row in self.field_notify_signals:
             for notify_signal in row:
                 notify_signal.emit()
@@ -124,4 +142,5 @@ class Model(QObject):
     field_2_0 = Property(str, _field_2_0, notify=field_2_0_changed)
     field_2_1 = Property(str, _field_2_1, notify=field_2_1_changed)
     field_2_2 = Property(str, _field_2_2, notify=field_2_2_changed)
-    current_player = Property(str, _current_player, set_current_player, notify=current_player_changed)
+    current_player = Property(str, _current_player, _set_current_player, notify=current_player_changed)
+    game_over = Property(bool, _game_over, _set_game_over)
