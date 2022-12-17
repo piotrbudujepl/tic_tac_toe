@@ -16,6 +16,9 @@ ColumnLayout {
             }
         }
     }
+    Text {
+        text: "Current player: " + model.current_player
+    }
     GridLayout {
         Layout.fillWidth: true
         Layout.fillHeight: true
