@@ -50,5 +50,4 @@ class Controller(QObject):
             self.game_ended.emit("Game over! Player: '{}' won!".format(winner))
         if self.is_stalemate():
             self.model.game_over = True
-
             self.game_ended.emit("Game over! No more moves possible.")
