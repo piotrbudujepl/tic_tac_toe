@@ -20,14 +20,14 @@ class Model(QObject):
              self.field_2_1_changed,
              self.field_2_2_changed)
         ]
-        self._current_player_value = "O"
-        self._game_over_value = False
+        self._current_player = "O"
+        self._game_over = False
 
-    def _game_over(self):
-        return self._game_over_value
+    def get_game_over(self):
+        return self._game_over
 
-    def _set_game_over(self, value):
-        self._game_over_value = value
+    def set_game_over(self, value):
+        self._game_over = value
 
     def field_has_value(self, y, x):
         return self.board[y][x] != ""
@@ -46,11 +46,11 @@ class Model(QObject):
         self.board[y][x] = value
         self.field_notify_signals[y][x].emit()
 
-    def _current_player(self):
-        return self._current_player_value
+    def get_current_player(self):
+        return self._current_player
 
-    def _set_current_player(self, player):
-        self._current_player_value = player
+    def set_current_player(self, player):
+        self._current_player = player
         self.current_player_changed.emit()
 
     @Signal
@@ -63,8 +63,8 @@ class Model(QObject):
             ["", "", ""],
             ["", "", ""]
         ]
-        self._current_player_value = "O"
-        self._game_over_value = False
+        self._game_over = False
+        self._current_player = "O"
         for row in self.field_notify_signals:
             for notify_signal in row:
                 notify_signal.emit()
@@ -74,73 +74,73 @@ class Model(QObject):
     def field_0_0_changed(self):
         pass
 
-    def _field_0_0(self):
+    def get_field_0_0(self):
         return self.board[0][0]
 
     @Signal
     def field_0_1_changed(self):
         pass
 
-    def _field_0_1(self):
+    def get_field_0_1(self):
         return self.board[0][1]
 
     @Signal
     def field_0_2_changed(self):
         pass
 
-    def _field_0_2(self):
+    def get_field_0_2(self):
         return self.board[0][2]
 
     @Signal
     def field_1_0_changed(self):
         pass
 
-    def _field_1_0(self):
+    def get_field_1_0(self):
         return self.board[1][0]
 
     @Signal
     def field_1_1_changed(self):
         pass
 
-    def _field_1_1(self):
+    def get_field_1_1(self):
         return self.board[1][1]
 
     @Signal
     def field_1_2_changed(self):
         pass
 
-    def _field_1_2(self):
+    def get_field_1_2(self):
         return self.board[1][2]
 
     @Signal
     def field_2_0_changed(self):
         pass
 
-    def _field_2_0(self):
+    def get_field_2_0(self):
         return self.board[2][0]
 
     @Signal
     def field_2_1_changed(self):
         pass
 
-    def _field_2_1(self):
+    def get_field_2_1(self):
         return self.board[2][1]
 
     @Signal
     def field_2_2_changed(self):
         pass
 
-    def _field_2_2(self):
+    def get_field_2_2(self):
         return self.board[2][2]
 
-    field_0_0 = Property(str, _field_0_0, notify=field_0_0_changed)
-    field_0_1 = Property(str, _field_0_1, notify=field_0_1_changed)
-    field_0_2 = Property(str, _field_0_2, notify=field_0_2_changed)
-    field_1_0 = Property(str, _field_1_0, notify=field_1_0_changed)
-    field_1_1 = Property(str, _field_1_1, notify=field_1_1_changed)
-    field_1_2 = Property(str, _field_1_2, notify=field_1_2_changed)
-    field_2_0 = Property(str, _field_2_0, notify=field_2_0_changed)
-    field_2_1 = Property(str, _field_2_1, notify=field_2_1_changed)
-    field_2_2 = Property(str, _field_2_2, notify=field_2_2_changed)
-    current_player = Property(str, _current_player, _set_current_player, notify=current_player_changed)
-    game_over = Property(bool, _game_over, _set_game_over)
+    field_0_0 = Property(str, get_field_0_0, notify=field_0_0_changed)
+    field_0_1 = Property(str, get_field_0_1, notify=field_0_1_changed)
+    field_0_2 = Property(str, get_field_0_2, notify=field_0_2_changed)
+    field_1_0 = Property(str, get_field_1_0, notify=field_1_0_changed)
+    field_1_1 = Property(str, get_field_1_1, notify=field_1_1_changed)
+    field_1_2 = Property(str, get_field_1_2, notify=field_1_2_changed)
+    field_2_0 = Property(str, get_field_2_0, notify=field_2_0_changed)
+    field_2_1 = Property(str, get_field_2_1, notify=field_2_1_changed)
+    field_2_2 = Property(str, get_field_2_2, notify=field_2_2_changed)
+    current_player = Property(str, get_current_player, set_current_player, notify=current_player_changed)
+    game_over = Property(bool, get_game_over, set_game_over)
