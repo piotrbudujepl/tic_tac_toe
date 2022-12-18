@@ -36,6 +36,7 @@ class Controller(QObject):
     @Slot(int, int)
     def move(self, y, x):
         if self.model.game_over:
+            self.game_ended.emit("Game over! Press 'New game' to play again.")
             return
         if self.model.field_has_value(y, x):
             return
@@ -49,4 +50,5 @@ class Controller(QObject):
             self.game_ended.emit("Game over! Player: '{}' won!".format(winner))
         if self.is_stalemate():
             self.model.game_over = True
-            self.game_ended.emit("Game over! No more moves possible")
+
+            self.game_ended.emit("Game over! No more moves possible.")
